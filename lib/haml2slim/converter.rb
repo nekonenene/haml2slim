@@ -73,7 +73,14 @@ module Haml2Slim
           space = $1
           key = $2
           value = $3
-          wrapped_value = value.to_s =~ /\s+/ ? "(#{value})" : value
+          wrapped_value =
+            if value =~ /^["'].*?["']$/
+              value
+            elsif value =~ /\s+/
+              "(#{value})"
+            else
+              value
+            end
           "#{space}#{key_prefix}#{key}=#{wrapped_value}"
         end
       end

@@ -82,6 +82,12 @@ class TestHaml2Slim < MiniTest::Unit::TestCase
     assert_haml_to_slim haml, slim
   end
 
+  def test_space_containing_attributes
+    haml = '%a{:class => "klass1 klass2"}'
+    slim = 'a class="klass1 klass2"'
+    assert_haml_to_slim haml, slim
+  end
+
   def test_no_html_escape_predicate
     haml = '!= method_call'
     slim = '== method_call'
