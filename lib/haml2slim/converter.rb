@@ -42,7 +42,7 @@ module Haml2Slim
           when nil        then ""
           else "| #{line}"
           end
-      end
+        end
 
       if converted.chomp!(' |')
         converted.sub!(/^\| /, '')
