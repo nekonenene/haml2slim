@@ -118,9 +118,15 @@ class TestHaml2Slim < Minitest::Test
     assert_haml_to_slim haml, slim
   end
 
-  def test_string_interpolation
+  def test_ruby_interpolation
     haml = '%span #{aa + bb} and #{cc + dd}'
     slim = 'span #{aa + bb} and #{cc + dd}'
+    assert_haml_to_slim haml, slim
+  end
+
+  def test_vue_interpolation
+    haml = '%span#sampleId1.sample-label {{ 1 + 1 }}'
+    slim = "span#sampleId1.sample-label\n  | {{ 1 + 1 }}"
     assert_haml_to_slim haml, slim
   end
 

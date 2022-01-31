@@ -19,6 +19,11 @@ module Haml2Slim
       # removes the HAML's whitespace removal characters ('>' and '<')
       line.gsub!(/(>|<)$/, '')
 
+      if line_contains_vue_interpolation = line.match(/^(.+) (\{\{.+\}\})$/)
+        line = line_contains_vue_interpolation[1]
+        vue_interpolation = line_contains_vue_interpolation[2]
+      end
+
       converted =
         case line[0, 2]
         when '&=' then line.sub(/^&=/, '==')
@@ -44,7 +49,11 @@ module Haml2Slim
         converted << ' \\'
       end
 
-      "#{indent}#{converted}\n"
+      if vue_interpolation.nil?
+        "#{indent}#{converted}\n"
+      else
+        "#{indent}#{converted}\n#{indent}  | #{vue_interpolation}\n"
+      end
     end
 
     def parse_tag(tag_line)
