@@ -12,6 +12,7 @@ GEM
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
+    minitest (5.15.0)
     nokogiri (1.13.1-x86_64-darwin)
       racc (~> 1.4)
     racc (1.6.0)
@@ -30,6 +31,7 @@ PLATFORMS
 
 DEPENDENCIES
   haml2slim!
+  minitest
   rake
   slim (>= 1.0.0)
 
