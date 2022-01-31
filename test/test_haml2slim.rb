@@ -65,8 +65,14 @@ class TestHaml2Slim < Minitest::Test
   end
 
   def test_hash_convert
-    haml = '%a{:title => 1 + 1, :href => "/#{test_obj.method}", :height => "50px", :width => "50px"}'
+    haml = '%a{:title => 1 + 1, :href => "/#{test_obj.method}", "height" => "50px", "width" => "50px"}'
     slim = 'a title=(1 + 1) href="/#{test_obj.method}" height="50px" width="50px"'
+    assert_haml_to_slim haml, slim
+  end
+
+  def test_hash_with_single_quotes_convert
+    haml = "%a{:title => 1 + 1, :href => '/', 'height' => '50px', 'width' => '50px'}"
+    slim = "a title=(1 + 1) href='/' height='50px' width='50px'"
     assert_haml_to_slim haml, slim
   end
 
@@ -77,8 +83,14 @@ class TestHaml2Slim < Minitest::Test
   end
 
   def test_ruby19_syntax_hash_convert
-    haml = '%a{title: 1 + 1, href: "/#{test_obj.method}", height: "50px", width: "50px"}'
+    haml = '%a{title: 1 + 1, href: "/#{test_obj.method}", "height": "50px", "width": "50px"}'
     slim = 'a title=(1 + 1) href="/#{test_obj.method}" height="50px" width="50px"'
+    assert_haml_to_slim haml, slim
+  end
+
+  def test_ruby19_syntax_hash_with_single_quotes_convert
+    haml = "%a{title: 1 + 1, href: '/', 'height': '50px', 'width': '50px'}"
+    slim = "a title=(1 + 1) href='/' height='50px' width='50px'"
     assert_haml_to_slim haml, slim
   end
 
