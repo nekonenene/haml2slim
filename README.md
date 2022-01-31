@@ -22,10 +22,22 @@ You may convert files using the included executable `haml2slim`.
 
 Alternatively, to convert files or strings on the fly in your application, you may do so by calling `Haml2Slim.convert!`.
 
+## Development
+
+1. Clone this repository
+2. `bundle install`
+3. `bin/haml2slim <INPUT_FILENAME_OR_DIRECTORY>`
+
+### Test
+
+```sh
+bundle exec rake test
+```
+
 ## License
 
 This project is released under the MIT license.
 
 ## Author
 
-[Fred Wu](https://github.com/fredwu)
+[Fred Wu](https://github.com/fredwu) with [nekonenene](https://github.com/nekonenene)
