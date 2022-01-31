@@ -114,7 +114,7 @@ class TestHaml2Slim < Minitest::Test
 
   def test_no_html_escape_predicate2
     haml = '%span!= method_call'
-    slim = 'span== method_call'
+    slim = 'span == method_call'
     assert_haml_to_slim haml, slim
   end
 
