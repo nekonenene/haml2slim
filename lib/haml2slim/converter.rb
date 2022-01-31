@@ -63,7 +63,7 @@ module Haml2Slim
 
       if tag_line_contains_attr = tag_line.match(/^([\w#\.\-]+)\{(.+)\}(.*)/)
         tag, attrs, text = *tag_line_contains_attr[1..3]
-        "#{tag} #{parse_attrs(attrs)} #{text}"
+        "#{tag} #{parse_attrs(attrs)} #{text}".strip
       else
         tag_line.sub(/^!=/, '=')
       end
