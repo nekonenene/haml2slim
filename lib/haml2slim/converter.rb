@@ -19,22 +19,23 @@ module Haml2Slim
       # removes the HAML's whitespace removal characters ('>' and '<')
       line.gsub!(/(>|<)$/, '')
 
-      converted = case line[0, 2]
+      converted =
+        case line[0, 2]
         when '&=' then line.sub(/^&=/, '==')
         when '!=' then line.sub(/^!=/, '==')
         when '-#' then line.sub(/^-#/, '/')
         when '#{' then line
         else
           case line[0]
-            when ?%, ?., ?# then parse_tag(line)
-            when ?:         then "#{line[1..-1]}:"
-            when ?!         then line == "!!!" ? line.sub(/^!!!/, 'doctype html') : line.sub(/^!!!/, 'doctype')
-            when ?-, ?=     then line
-            when ?~         then line.sub(/^~/, '=')
-            when ?/         then line.sub(/^\//, '/!')
-            when ?\         then line.sub(/^\\/, '|')
-            when nil        then ""
-            else "| #{line}"
+          when ?%, ?., ?# then parse_tag(line)
+          when ?:         then "#{line[1..-1]}:"
+          when ?!         then line == "!!!" ? line.sub(/^!!!/, 'doctype html') : line.sub(/^!!!/, 'doctype')
+          when ?-, ?=     then line
+          when ?~         then line.sub(/^~/, '=')
+          when ?/         then line.sub(/^\//, '/!')
+          when ?\         then line.sub(/^\\/, '|')
+          when nil        then ""
+          else "| #{line}"
           end
       end
 
