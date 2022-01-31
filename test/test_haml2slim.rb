@@ -100,6 +100,12 @@ class TestHaml2Slim < Minitest::Test
     assert_haml_to_slim haml, slim
   end
 
+  def test_method_call
+    haml = '%span.label= aa + bb'
+    slim = 'span.label = aa + bb'
+    assert_haml_to_slim haml, slim
+  end
+
   def test_no_html_escape_predicate
     haml = '!= method_call'
     slim = '== method_call'
