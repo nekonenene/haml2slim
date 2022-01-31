@@ -1,7 +1,7 @@
 module Haml2Slim
   class Converter
     def initialize(haml)
-      @slim = ""
+      @slim = ''
 
       haml.each_line do |line|
         @slim << parse_line(line)
@@ -60,7 +60,7 @@ module Haml2Slim
       end
     end
 
-    def parse_attrs(attrs, key_prefix="")
+    def parse_attrs(attrs, key_prefix='')
       data_temp = {}
 
       [
@@ -69,7 +69,7 @@ module Haml2Slim
       ].each do |regexp|
         attrs.gsub!(regexp) do
           key = rand(99999).to_s
-          data_temp[key] = parse_attrs($1, "data-")
+          data_temp[key] = parse_attrs($1, 'data-')
           ":#{key} => #{key}"
         end
       end
@@ -83,7 +83,7 @@ module Haml2Slim
           key = $3
           value = $5.strip
           wrapped_value = value.to_s =~ /\s+/ ? "(#{value})" : value
-          wrapped_value = wrapped_value.start_with?(":") ? "\"#{wrapped_value.delete(':')}\"" : wrapped_value
+          wrapped_value = wrapped_value.start_with?(':') ? "\"#{wrapped_value.delete(':')}\"" : wrapped_value
           "#{space}#{key_prefix}#{key}=#{wrapped_value}"
         end
       end
