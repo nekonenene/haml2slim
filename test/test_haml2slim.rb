@@ -77,8 +77,8 @@ class TestHaml2Slim < Minitest::Test
   end
 
   def test_data_attributes_convert
-    haml = '%a{:href => "test", :data => {:param1 => var, :param2 => 1 + 1, :param3 => "string", :param4 => :symbol}}'
-    slim = 'a href="test" data-param1=var data-param2=(1 + 1) data-param3="string" data-param4="symbol"'
+    haml = '%a{:href => "test", :data => {:param1 => var, :param2 => 1 + 1, :param3 => "string string", :param4 => :symbol}}'
+    slim = 'a href="test" data-param1=var data-param2=(1 + 1) data-param3="string string" data-param4="symbol"'
     assert_haml_to_slim haml, slim
   end
 
@@ -95,8 +95,8 @@ class TestHaml2Slim < Minitest::Test
   end
 
   def test_ruby19_syntax_hash_data_attributes_convert
-    haml = '%a{href: "test", data: { param1: var, param2: 1 + 1, param3: "string", param4: :symbol }}'
-    slim = 'a href="test" data-param1=var data-param2=(1 + 1) data-param3="string" data-param4="symbol"'
+    haml = '%a{href: "test", data: { param1: var, param2: 1 + 1, param3: "string string", param4: :symbol }}'
+    slim = 'a href="test" data-param1=var data-param2=(1 + 1) data-param3="string string" data-param4="symbol"'
     assert_haml_to_slim haml, slim
   end
 

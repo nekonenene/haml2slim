@@ -91,7 +91,7 @@ module Haml2Slim
           space = $1
           key = $3
           value = $5.strip
-          wrapped_value = value.to_s =~ /\s+/ ? "(#{value})" : value
+          wrapped_value = (!value.match?(/['"]/) && value.include?("\s")) ? "(#{value})" : value
           wrapped_value = wrapped_value.start_with?(':') ? "\"#{wrapped_value.delete(':')}\"" : wrapped_value
           "#{space}#{key_prefix}#{key}=#{wrapped_value}"
         end
