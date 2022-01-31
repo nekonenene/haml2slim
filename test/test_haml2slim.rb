@@ -1,7 +1,7 @@
 require 'helper'
 require 'tmpdir'
 
-class TestHaml2Slim < MiniTest::Unit::TestCase
+class TestHaml2Slim < Minitest::Test
   def setup
     create_haml_file
   end
