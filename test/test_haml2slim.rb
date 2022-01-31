@@ -112,6 +112,12 @@ class TestHaml2Slim < Minitest::Test
     assert_haml_to_slim haml, slim
   end
 
+  def test_string_interpolation
+    haml = '%span #{aa + bb} and #{cc + dd}'
+    slim = 'span #{aa + bb} and #{cc + dd}'
+    assert_haml_to_slim haml, slim
+  end
+
   private
 
   def assert_haml_to_slim(actual_haml, expected_slim)
