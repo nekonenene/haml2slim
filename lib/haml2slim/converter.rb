@@ -73,13 +73,13 @@ module Haml2Slim
       end
 
       [
-        /,?( ?):?"?([^"'{ ]+)"?:\s*(:?[^,]*)/, # { a: b } (Ruby 1.7 Hash Syntax)
-        /,?( ?):?"?([^"'{ ]+)"?\s*=>\s*(:?[^,]*)/, # { a => b }
+        /,?( ?):?('|")?([^"'{ ]+)('|")?:\s*(:?[^,]*)/, # { a: b } (Ruby 1.7 Hash Syntax)
+        /,?( ?):?('|")?([^"'{ ]+)('|")?\s*=>\s*(:?[^,]*)/, # { a => b }
       ].each do |regexp|
         attrs.gsub!(regexp) do
           space = $1
-          key = $2
-          value = $3.strip
+          key = $3
+          value = $5.strip
           wrapped_value = value.to_s =~ /\s+/ ? "(#{value})" : value
           wrapped_value = wrapped_value.start_with?(":") ? "\"#{wrapped_value.delete(':')}\"" : wrapped_value
           "#{space}#{key_prefix}#{key}=#{wrapped_value}"
