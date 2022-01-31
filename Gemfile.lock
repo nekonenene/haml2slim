@@ -1,0 +1,37 @@
+PATH
+  remote: .
+  specs:
+    haml2slim (0.4.7)
+      haml (>= 3.0)
+      nokogiri
+      ruby_parser
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    haml (5.2.2)
+      temple (>= 0.8.0)
+      tilt
+    nokogiri (1.13.1-x86_64-darwin)
+      racc (~> 1.4)
+    racc (1.6.0)
+    rake (13.0.6)
+    ruby_parser (3.18.1)
+      sexp_processor (~> 4.16)
+    sexp_processor (4.16.0)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
+    temple (0.8.2)
+    tilt (2.0.10)
+
+PLATFORMS
+  x86_64-darwin-20
+
+DEPENDENCIES
+  haml2slim!
+  rake
+  slim (>= 1.0.0)
+
+BUNDLED WITH
+   2.2.22
