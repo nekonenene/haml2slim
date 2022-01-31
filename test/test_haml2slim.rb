@@ -101,8 +101,8 @@ class TestHaml2Slim < Minitest::Test
   end
 
   def test_method_call
-    haml = '%span.label= aa + bb'
-    slim = 'span.label = aa + bb'
+    haml = '%span#sampleId1.sample-label= aa + bb'
+    slim = 'span#sampleId1.sample-label = aa + bb'
     assert_haml_to_slim haml, slim
   end
 
