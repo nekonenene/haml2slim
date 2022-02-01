@@ -60,6 +60,10 @@ module Haml2Slim
       tag_line.sub!(/^%/, '')
       tag_line.sub!(/^([\w#\.\-]+)=/, '\1 =')
       tag_line.sub!(/^([\w#\.\-]+)!=/, '\1 ==')
+      # Avoid syntax errors caused by attributes wrapper characters
+      tag_line.sub!(/^([\w#\.\-]+ )\(/, '\1&#40;')
+      tag_line.sub!(/^([\w#\.\-]+ )\[/, '\1&#91;')
+      tag_line.sub!(/^([\w#\.\-]+ )\{/, '\1&#123;')
 
       if tag_line_contains_attr = tag_line.match(/^([\w#\.\-]+)\{(.+)\}(.*)/)
         tag, attrs, text = *tag_line_contains_attr[1..3]

@@ -124,6 +124,12 @@ class TestHaml2Slim < Minitest::Test
     assert_haml_to_slim haml, slim
   end
 
+  def test_avoid_attributes_syntax_error
+    haml = '%span (#{aaa})' + "\n" + '%span [#{aaa}]' + "\n" + '%span {#{aaa}}'
+    slim = 'span &#40;#{aaa})' + "\n" + 'span &#91;#{aaa}]' + "\n" + 'span &#123;#{aaa}}'
+    assert_haml_to_slim haml, slim
+  end
+
   def test_vue_interpolation
     haml = '%span#sampleId1.sample-label {{ 1 + 1 }}'
     slim = "span#sampleId1.sample-label\n  | {{ 1 + 1 }}"
