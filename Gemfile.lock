@@ -15,6 +15,8 @@ GEM
     minitest (5.15.0)
     nokogiri (1.13.1-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.1-x86_64-linux)
+      racc (~> 1.4)
     racc (1.6.0)
     rake (13.0.6)
     ruby_parser (3.18.1)
@@ -27,7 +29,8 @@ GEM
     tilt (2.0.10)
 
 PLATFORMS
-  x86_64-darwin-20
+  x86_64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   haml2slim!
@@ -36,4 +39,4 @@ DEPENDENCIES
   slim (>= 1.0.0)
 
 BUNDLED WITH
-   2.2.22
+   2.2.32
