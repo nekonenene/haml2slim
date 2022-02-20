@@ -74,22 +74,24 @@ module Haml2Slim
     end
 
     def parse_attrs(attrs, key_prefix='')
-      data_temp = {}
+      stored_data_attributes_hash = {} # { 10001: "data-param1=true", 10002: "data-param1=false", ... }
+      num_for_store = 10000
 
       [
-        /data:\s*\{\s*([^\}]*)\s*\}/, # { a: b } (Ruby 1.7 Hash Syntax)
-        /:data\s*=>\s*\{([^\}]*)\s*\}/, # { a => b }
+        /data:\s*\{\s*([^\}]*)\s*\}/, # { data: { a: b, ... } } (Ruby 1.7 Hash Syntax)
+        /:data\s*=>\s*\{([^\}]*)\s*\}/, # { :data => { :a => b, ... } }
       ].each do |regexp|
         attrs.gsub!(regexp) do
-          key = rand(99999).to_s
-          data_temp[key] = parse_attrs($1.gsub('_', '-'), 'data-')
-          ":#{key} => #{key}"
+          key_with_hyphen = $1.gsub('_', '-')
+          num_for_store += 1
+          stored_data_attributes_hash[num_for_store] = parse_attrs(key_with_hyphen, 'data-')
+          ":#{num_for_store} => #{num_for_store}"
         end
       end
 
       [
         /,?( ?):?('|")?([^"'{ ]+)('|")?:\s*(:?[^,]*)/, # { a: b } (Ruby 1.7 Hash Syntax)
-        /,?( ?):?('|")?([^"'{ ]+)('|")?\s*=>\s*(:?[^,]*)/, # { a => b }
+        /,?( ?):?('|")?([^"'{ ]+)('|")?\s*=>\s*(:?[^,]*)/, # { :a => b }
       ].each do |regexp|
         attrs.gsub!(regexp) do
           space = $1
@@ -101,8 +103,8 @@ module Haml2Slim
         end
       end
 
-      data_temp.each do |k, v|
-        attrs.gsub!("#{k}=#{k}", v)
+      stored_data_attributes_hash.each do |num_for_store, data_attribute|
+        attrs.gsub!("#{num_for_store}=#{num_for_store}", data_attribute)
       end
 
       attrs
