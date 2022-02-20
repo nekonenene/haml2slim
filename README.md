@@ -40,4 +40,4 @@ This project is released under the MIT license.
 
 ## Author
 
-[Fred Wu](https://github.com/fredwu) with [nekonenene](https://github.com/nekonenene)
+[Fred Wu](https://github.com/fredwu) and [nekonenene](https://github.com/nekonenene)
