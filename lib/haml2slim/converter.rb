@@ -82,7 +82,7 @@ module Haml2Slim
       ].each do |regexp|
         attrs.gsub!(regexp) do
           key = rand(99999).to_s
-          data_temp[key] = parse_attrs($1, 'data-')
+          data_temp[key] = parse_attrs($1.gsub('_', '-'), 'data-')
           ":#{key} => #{key}"
         end
       end
